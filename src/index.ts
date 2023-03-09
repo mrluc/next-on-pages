@@ -439,7 +439,7 @@ const transform = async ({
           )}, entrypoint: require('${filepath}')}`
       )
       .join(",")}};
-      
+
       export const __MIDDLEWARE__ = {${[...hydratedMiddleware.entries()]
         .map(
           ([name, { matchers, filepath }]) =>
@@ -467,6 +467,9 @@ const transform = async ({
   });
 
   console.log("⚡️ Generated '.vercel/output/static/_worker.js'.");
+
+  const size = (await stat('.vercel/output/static/_worker.js')).size;
+  console.log(`?   fs stat.size of the worker is: ${size}`);
 };
 
 const help = () => {
